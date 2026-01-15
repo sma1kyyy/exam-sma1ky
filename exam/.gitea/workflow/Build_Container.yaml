@@ -1,0 +1,65 @@
+name: build and push dockerfiles
+on:
+  push:
+    tags:
+      - 'v*' 
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Log in to container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.DOCKER_REGISTER }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Build and push Docker image api
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/api.Dockerfile
+          push: true
+          tags: |
+            git.klsh.ru/kulikov/api-service:latest
+            git.klsh.ru/kulikov/api-service:${{ github.ref_name }}
+
+      - name: Build and push Docker image info
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/info.Dockerfile
+          push: true
+          tags: |
+            git.klsh.ru/kulikov/info-service:latest
+            git.klsh.ru/kulikov/info-service:${{ github.ref_name }}
+
+      - name: Build and push Docker image login
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/login.Dockerfile
+          push: true
+          tags: |
+            git.klsh.ru/kulikov/login-service:latest
+            git.klsh.ru/kulikov/login-service:${{ github.ref_name }}
+
+      - name: Build and push Docker image root
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/root.Dockerfile
+          push: true
+          tags: |
+            git.klsh.ru/kulikov/root-service:latest
+            git.klsh.ru/kulikov/root-service:${{ github.ref_name }}
+
+      - name: Job status
+        run: echo "This job's status is ${{ job.status }}."

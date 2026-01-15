@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: info-app
+  namespace: kulikov
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: info-app
+  template:
+    metadata:
+      labels:
+        app: info-app
+    spec:
+      containers:
+      - name: info-container
+        image: git.klsh.ru/kulikov/info-service:latest
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        envFrom:
+            - configMapRef:
+                name: info-config

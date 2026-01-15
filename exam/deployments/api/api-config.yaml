@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: kulikov
+data:
+  API_APP_NAME: "api-service"
+  API_BIND_PORT: "8080"

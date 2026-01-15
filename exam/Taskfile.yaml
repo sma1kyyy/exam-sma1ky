@@ -1,0 +1,48 @@
+version: "3"
+
+vars:
+  REGISTRY: git.klsh.ru
+  USER: kulikov
+  TAG: latest
+
+tasks:
+  build:
+    desc: Сборка всех Docker образов
+    cmds:
+      - docker build -f ./docker/api.Dockerfile -t {{.REGISTRY}}/{{.USER}}/api-service:{{.TAG}} .
+      - docker build -f ./docker/info.Dockerfile -t {{.REGISTRY}}/{{.USER}}/info-service:{{.TAG}} .
+      - docker build -f ./docker/login.Dockerfile -t {{.REGISTRY}}/{{.USER}}/login-service:{{.TAG}} .
+      - docker build -f ./docker/root.Dockerfile -t {{.REGISTRY}}/{{.USER}}/root-service:{{.TAG}} .
+
+  push:
+    desc: Отправка образов в реестр
+    cmds:
+      - docker push {{.REGISTRY}}/{{.USER}}/api-service:{{.TAG}}
+      - docker push {{.REGISTRY}}/{{.USER}}/info-service:{{.TAG}}
+      - docker push {{.REGISTRY}}/{{.USER}}/login-service:{{.TAG}} 
+      - docker push {{.REGISTRY}}/{{.USER}}/root-service:{{.TAG}} 
+
+  deploy:
+    desc: Деплой манифестов в Kubernetes
+    cmds:
+      - kubectl apply -f ./deployments/api/
+      - kubectl apply -f ./deployments/info/
+      - kubectl apply -f ./deployments/login/
+      - kubectl apply -f ./deployments/root/
+      - kubectl apply -f ./deployments/ingress/
+      - kubectl rollout restart deployment -n {{.USER}} api-app info-app login-app root-app
+
+  release:
+    desc: полный цикл сборка, пуш и деплой
+    cmds:
+      - task: build
+      - task: push
+      - task: deploy
+
+  config:
+    desc: настройка локального kubectl
+    cmds:
+      - kubectl config set-cluster sirius --server=https://k3s.klsh.ru:6443 --embed-certs=true
+      - kubectl config set-credentials {{.USER}} --client-certificate=./cert/user.crt --client-key=./cert/user.key --embed-certs=true
+      - kubectl config set-context sirius --cluster=sirius --namespace={{.USER}} --user={{.USER}}
+      - kubectl config use-context sirius

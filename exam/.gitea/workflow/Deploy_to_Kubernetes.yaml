@@ -1,0 +1,25 @@
+name: Deploy_to_Kubernetes
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Task
+        uses: arduino/setup-task@v2
+
+      - name: Configure kubectl
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config 
+          chmod 600 ~/.kube/config
+
+      - uses: azure/setup-kubectl@v4
+
+      - name: Deploy to Kubernetes
+        run: task deploy
