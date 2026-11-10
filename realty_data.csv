@@ -1,0 +1,17 @@
+city,name,developer,district,class,price_per_m2,delivery,source
+Москва,Мираполис,MR Group,СВАО,бизнес,314000,сдан,https://mirapolis.city/
+Москва,ВЕЙВ,Группа ЛСР,ЮАО,бизнес,524000,2026,https://xn--80aaezhdjarbe5ar5ezf.xn--p1ai/premium/biznes-klass
+Москва,Квартал МОНС,Брусника,САО,бизнес,522000,2027,https://xn--80aaezhdjarbe5ar5ezf.xn--p1ai/premium/biznes-klass
+Москва,Павелецкая от Гранель,Гранель,ЦАО,бизнес,672000,2028,https://xn--80aaezhdjarbe5ar5ezf.xn--p1ai/premium/biznes-klass
+Москва,SEZAR CITY,Sezar Group,САО,бизнес,525000,2027,https://xn--80aaezhdjarbe5ar5ezf.xn--p1ai/premium/biznes-klass
+Сочи,АК Korse,ГК Альпика,Центральный,бизнес,1046957,2 кв. 2027,https://sochi.cian.ru/novostroyki-biznes-klassa/
+Сочи,Benefit Sea Breeze Sochi,уточняется,Центральный,бизнес,947257,сдан,https://sochi.cian.ru/novostroyki-biznes-klassa/
+Сочи,Atrium Avenue,Nedvex Development,Хостинский,бизнес,573232,сдан,https://sochi.cian.ru/novostroyki-biznes-klassa/
+Сочи,Marine Garden Sochi,Реверс,Хостинский,бизнес,639594,4 кв. 2027,https://sochi.cian.ru/novostroyki-biznes-klassa/
+Сочи,Южное море,ГК ВнешОптоТорг,Хостинский,бизнес,545714,4 кв. 2027,https://sochi.cian.ru/novostroyki-biznes-klassa/
+Санкт-Петербург,Ассамблея,ПСК,Василеостровский,бизнес,423048,3 кв. 2028,https://zhk-assambleya-spb-sankt-peterburg-i.cian.ru/
+Санкт-Петербург,Северный ветер,Брусника,Василеостровский,бизнес,448706,2 кв. 2028,https://zhk-severnyy-veter-spb-i.cian.ru/
+Санкт-Петербург,М36,КВС,Московский,бизнес,370128,1 кв. 2029,https://firstfederal.ru/novostroyki/zhk-m36/
+Санкт-Петербург,Галерная Гавань,ПСК,Василеостровский,бизнес,452750,3 кв. 2028,https://firstfederal.ru/novostroyki/zhk-galernaya-gavan/
+Санкт-Петербург,Парусная 1,Строительный трест,Василеостровский,бизнес,360551,4 кв. 2026,https://zhk-parusnaya-1-spb-i.cian.ru/
+
