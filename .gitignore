@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Tests and tooling
+.pytest_cache/
+.coverage
+
+# Local configuration
+.env
+.DS_Store
