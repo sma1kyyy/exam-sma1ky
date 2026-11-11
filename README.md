@@ -1,44 +1,47 @@
 # AI Realty Selector
 
-Небольшой Python-проект для подбора объектов недвижимости по пользовательским ограничениям: город, максимальный бюджет, минимальная площадь и желаемое количество результатов.
+[![CI](https://github.com/sma1kyyy/exam-sma1ky/actions/workflows/ci.yml/badge.svg)](https://github.com/sma1kyyy/exam-sma1ky/actions/workflows/ci.yml)
 
-Проект подготовлен как тестовое задание и показывает полный минимальный цикл: чтение данных, фильтрацию, ранжирование и формирование понятного результата.
+A small, testable Python CLI that filters and ranks real-estate records by user constraints.
 
-## Что умеет
+This repository was prepared as a technical assignment and demonstrates a complete, intentionally simple workflow: CSV ingestion → validation/conversion → filtering → ranking → readable CLI output.
 
-- загружать объекты из CSV;
-- фильтровать по городу;
-- исключать объекты дороже заданного бюджета;
-- исключать объекты с недостаточной площадью;
-- возвращать до трёх наиболее подходящих вариантов;
-- работать через простой интерактивный CLI.
+## What it demonstrates
 
-## Структура
+- deterministic rule-based filtering rather than an unsubstantiated ML claim;
+- clear separation between data loading, selection logic and CLI interaction;
+- automated tests and GitHub Actions CI;
+- explicit limitations and production follow-ups.
+
+## Features
+
+- load records from CSV;
+- filter by city, maximum budget and minimum area;
+- rank matching records by closeness to the requested constraints;
+- return up to N results;
+- run interactively from the command line.
+
+## Structure
 
 ```text
 .
-├── ai_realty_selector.py   # загрузка данных, фильтрация и CLI
-├── realty_data.csv         # демонстрационный набор данных
-├── submission.html         # оформленный отчёт по заданию
-└── test_submission_notes.md # заметки о проверках и ограничениях
+├── ai_realty_selector.py    # loading, filtering, ranking and CLI
+├── realty_data.csv          # demo dataset
+├── exam/                    # assignment material
+├── tests/                   # automated tests
+├── submission.html          # formatted assignment report
+└── test_submission_notes.md # verification notes and limitations
 ```
 
-## Запуск
+## Run locally
 
-Требуется Python 3.10+.
+Python 3.10+:
 
 ```bash
 python ai_realty_selector.py
 ```
 
-После запуска программа запросит:
-
-1. город;
-2. максимальный бюджет;
-3. минимальную площадь;
-4. количество результатов.
-
-Пример сценария:
+Example:
 
 ```text
 Город: Сочи
@@ -47,30 +50,27 @@ python ai_realty_selector.py
 Количество вариантов: 3
 ```
 
-## Алгоритм
+Run tests:
 
-1. CSV читается через стандартный модуль `csv`.
-2. Числовые поля преобразуются в `float`.
-3. Применяются фильтры города, бюджета и площади.
-4. Подходящие объекты сортируются по близости к заданным ограничениям.
-5. Возвращается не более `N` результатов.
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
+```
 
-Это демонстрационный rule-based подбор, а не ML-модель и не инвестиционная рекомендация.
+## Algorithm
 
-## Данные и ограничения
+1. Read CSV records.
+2. Convert numeric fields to `float`.
+3. Apply city, budget and area constraints.
+4. Rank matching records by distance to the requested limits.
+5. Return no more than N records.
 
-- Набор данных учебный и содержит 15 строк, поэтому перед реальным использованием его нужно заменить или дополнить проверенными источниками.
-- Проект не проверяет актуальность объявления, юридическую чистоту объекта и достоверность цены.
-- В текущей версии ввод рассчитан на корректные значения; для production-использования стоит добавить валидацию, обработку пустых результатов и автоматические тесты.
+This is a demo rule-based selector, not an ML model or an investment recommendation.
 
-## Результат
+## Limitations
 
-Оформленный отчёт с объяснением подхода находится в [submission.html](submission.html).
+The dataset is educational and contains 15 rows. The project does not verify listing freshness, legal status or price accuracy. Input validation and empty-result handling are intentionally listed as production follow-ups.
 
-## AI disclosure
+## Author
 
-При подготовке решения использовались AI-инструменты для структурирования подхода, проверки формулировок и подготовки черновых материалов. Логику программы, структуру результата и ограничения необходимо проверять вручную перед использованием.
-
-## Автор
-
-Кирилл Куликов — [GitHub](https://github.com/sma1kyyy)
+Kirill Kulikov — [GitHub](https://github.com/sma1kyyy)
