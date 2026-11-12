@@ -1,27 +1,32 @@
 # AI Realty Selector
 
 [![CI](https://github.com/sma1kyyy/exam-sma1ky/actions/workflows/ci.yml/badge.svg)](https://github.com/sma1kyyy/exam-sma1ky/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 
-A small, testable Python CLI that filters and ranks real-estate records by user constraints.
+A small, testable Python CLI that filters and ranks real-estate records by explicit user constraints.
 
-This repository was prepared as a technical assignment and demonstrates a complete, intentionally simple workflow: CSV ingestion → validation/conversion → filtering → ranking → readable CLI output.
+This repository was prepared as a technical assignment and demonstrates a complete, intentionally simple workflow:
+
+`CSV ingestion → validation/conversion → filtering → ranking → readable CLI output`
 
 ## What it demonstrates
 
-- deterministic rule-based filtering rather than an unsubstantiated ML claim;
-- clear separation between data loading, selection logic and CLI interaction;
-- automated tests and GitHub Actions CI;
-- explicit limitations and production follow-ups.
+- deterministic rule-based logic instead of an unsubstantiated ML claim;
+- separation between data loading, selection logic and CLI interaction;
+- automated tests executed in GitHub Actions;
+- reproducible local setup and explicit limitations;
+- clear communication of what is production-ready and what is not.
 
 ## Features
 
 - load records from CSV;
 - filter by city, maximum budget and minimum area;
-- rank matching records by closeness to the requested constraints;
+- rank matches by distance to requested constraints;
 - return up to N results;
-- run interactively from the command line.
+- run interactively from the command line;
+- handle empty-result cases with a readable message.
 
-## Structure
+## Project structure
 
 ```text
 .
@@ -35,13 +40,14 @@ This repository was prepared as a technical assignment and demonstrates a comple
 
 ## Run locally
 
-Python 3.10+:
+Requires Python 3.10+.
 
 ```bash
+python -m pip install -r requirements-dev.txt
 python ai_realty_selector.py
 ```
 
-Example:
+Example input:
 
 ```text
 Город: Сочи
@@ -50,12 +56,13 @@ Example:
 Количество вариантов: 3
 ```
 
-Run tests:
+Run the test suite:
 
 ```bash
-python -m pip install -r requirements-dev.txt
 python -m pytest -q
 ```
+
+CI runs the same test command on pushes and pull requests with Python 3.12.
 
 ## Algorithm
 
@@ -69,7 +76,7 @@ This is a demo rule-based selector, not an ML model or an investment recommendat
 
 ## Limitations
 
-The dataset is educational and contains 15 rows. The project does not verify listing freshness, legal status or price accuracy. Input validation and empty-result handling are intentionally listed as production follow-ups.
+The dataset is educational and contains 15 rows. The project does not verify listing freshness, legal status or price accuracy. Further production work would include stronger input validation, external data validation, structured logging and a service/API layer.
 
 ## Author
 
